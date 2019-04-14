@@ -1,0 +1,14 @@
+---
+targets:
+  - 8.8.8.8
+  - 172.30.100.1
+
+dns:
+  refresh: 0s
+  nameserver: 1.1.1.1
+
+ping:
+  interval: 0.5s
+  timeout: 0.49s
+  history-size: 10
+  payload-size: 56

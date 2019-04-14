@@ -1,0 +1,28 @@
+global:
+  scrape_interval:     5s
+  evaluation_interval: 5s
+  scrape_timeout:      5s
+  external_labels:
+    hostname: "{{ node_hostname.stdout }}"
+
+alerting:
+  alertmanagers:
+  - static_configs:
+    - targets:
+
+rule_files:
+
+scrape_configs:
+  - job_name: 'node'
+    static_configs:
+      - targets: ['localhost:9100']
+  - job_name: 'ping'
+    static_configs:
+      - targets: ['localhost:9427']
+    metric_relabel_configs:
+      - source_labels: [__name__]
+        regex: 'ping_rtt_ms'
+        action: drop
+
+remote_write:
+  - url: "{{ prom_remote_write_endpoint }}"

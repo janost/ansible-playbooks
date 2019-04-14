@@ -1,0 +1,4 @@
+---
+prom_remote_write_endpoint: "http://127.0.0.1:8086/api/v1/prom/write?u=user&p=password&db=database"
+overwrite_configs: no
+overwrite_services: yes

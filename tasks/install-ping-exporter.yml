@@ -1,0 +1,40 @@
+---
+- name: download ping_exporter
+  copy:
+    src: "{{ tarball_ping_exporter }}"
+    dest: "{{ tmp_ping_exporter }}"
+- name: create ping_exporter group
+  group:
+    name: ping_exporter
+    system: yes
+- name: create ping_exporter user
+  user:
+    name: ping_exporter
+    create_home: no
+    shell: /sbin/nologin
+    group: ping_exporter
+    system: yes
+- name: create /opt/ping_exporter
+  file:
+    name: /opt/ping_exporter
+    state: directory
+    owner: ping_exporter
+    group: ping_exporter
+- name: install ping_exporter
+  unarchive:
+    dest: /opt/ping_exporter
+    owner: ping_exporter
+    group: ping_exporter
+    remote_src: yes
+    src: "{{ tmp_ping_exporter }}"
+    extra_opts: ["--strip=2"]
+- name: configure ping_exporter
+  template:
+    src: templates/config/ping_exporter.yml
+    dest: /etc/ping_exporter.yml
+    force: "{{ overwrite_configs }}"
+- name: copy ping_exporter service unit
+  template:
+    src: templates/systemd/ping_exporter.service
+    dest: /etc/systemd/system/ping_exporter.service
+    force: "{{ overwrite_services }}"

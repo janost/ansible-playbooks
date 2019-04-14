@@ -1,0 +1,22 @@
+---
+- name: load architecture-dependent configuration
+  include_vars:
+    file: "vars/config_{{ ansible_architecture }}.yaml"
+- name: get hostname
+  shell: hostname
+  register: node_hostname
+- name: stop services
+  systemd:
+    state: stopped
+    name: "{{ item }}"
+  with_items:
+    - prometheus
+    - node_exporter
+    - ping_exporter
+  ignore_errors: yes
+
+- import_tasks: install-node-exporter.yml
+- import_tasks: install-ping-exporter.yml
+- import_tasks: install-prometheus.yml
+- import_tasks: cleanup.yml
+- import_tasks: start-services.yml

@@ -1,0 +1,4 @@
+---
+url_node_exporter: https://github.com/prometheus/node_exporter/releases/download/v0.17.0/node_exporter-0.17.0.linux-amd64.tar.gz
+url_prometheus: https://github.com/prometheus/prometheus/releases/download/v2.8.1/prometheus-2.8.1.linux-amd64.tar.gz
+tarball_ping_exporter: files/ping_exporter-3be6e85.linux-amd64.tar.gz

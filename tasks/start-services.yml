@@ -1,0 +1,11 @@
+---
+- name: start and enable services
+  systemd:
+    state: started
+    enabled: yes
+    daemon_reload: yes
+    name: "{{ item }}"
+  with_items:
+    - node_exporter
+    - ping_exporter
+    - prometheus

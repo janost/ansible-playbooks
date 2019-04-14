@@ -1,0 +1,37 @@
+---
+- name: download node_exporter
+  get_url:
+    url: "{{ url_node_exporter }}"
+    dest: "{{ tmp_node_exporter }}"
+    mode: 0400
+    force: yes
+- name: create node_exporter group
+  group:
+    name: node_exporter
+    system: yes
+- name: create node_exporter user
+  user:
+    name: node_exporter
+    create_home: no
+    shell: /sbin/nologin
+    group: node_exporter
+    system: yes
+- name: create /opt/node_exporter
+  file:
+    name: /opt/node_exporter
+    state: directory
+    owner: node_exporter
+    group: node_exporter
+- name: install node_exporter
+  unarchive:
+    dest: /opt/node_exporter
+    owner: node_exporter
+    group: node_exporter
+    remote_src: yes
+    src: "{{ tmp_node_exporter }}"
+    extra_opts: ["--strip=1"]
+- name: copy node_exporter service unit
+  template:
+    src: templates/systemd/node_exporter.service
+    dest: /etc/systemd/system/node_exporter.service
+    force: "{{ overwrite_services }}"

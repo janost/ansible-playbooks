@@ -1,0 +1,42 @@
+---
+- name: download prometheus
+  get_url:
+    url: "{{ url_prometheus }}"
+    dest: "{{ tmp_prometheus }}"
+    mode: 0400
+    force: yes
+- name: create prometheus group
+  group:
+    name: prometheus
+    system: yes
+- name: create prometheus user
+  user:
+    name: prometheus
+    create_home: no
+    shell: /sbin/nologin
+    group: prometheus
+    system: yes
+- name: create /opt/prometheus
+  file:
+    name: /opt/prometheus
+    state: directory
+    owner: prometheus
+    group: prometheus
+- name: install prometheus
+  unarchive:
+    dest: /opt/prometheus
+    owner: prometheus
+    group: prometheus
+    remote_src: yes
+    src: "{{ tmp_prometheus }}"
+    extra_opts: ["--strip=1"]
+- name: copy prometheus service unit
+  template:
+    src: templates/systemd/prometheus.service
+    dest: /etc/systemd/system/prometheus.service
+    force: "{{ overwrite_services }}"
+- name: copy prometheus configuration
+  template:
+    src: templates/config/prometheus.yml
+    dest: /etc/prometheus.yml
+    force: "{{ overwrite_configs }}"
