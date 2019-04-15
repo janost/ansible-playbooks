@@ -9,8 +9,9 @@ Group=prometheus
 Restart=on-failure
 ProtectSystem=full
 ProtectHome=true
+TimeoutSec=10s
 WorkingDirectory=/opt/prometheus
-ExecStart=/opt/prometheus/prometheus --storage.tsdb.path=/opt/prometheus/data --storage.tsdb.retention=1d --config.file="/etc/prometheus.yml"
+ExecStart=/opt/prometheus/prometheus --storage.tsdb.path=/opt/prometheus/data --storage.tsdb.retention.time=1d --config.file="/etc/prometheus/config.yml"
 
 [Install]
 WantedBy=multi-user.target

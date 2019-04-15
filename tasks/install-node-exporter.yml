@@ -31,7 +31,7 @@
     src: "{{ tmp_node_exporter }}"
     extra_opts: ["--strip=1"]
 - name: copy node_exporter service unit
-  template:
-    src: templates/systemd/node_exporter.service
+  copy:
+    src: files/etc/systemd/system/node_exporter.service
     dest: /etc/systemd/system/node_exporter.service
     force: "{{ overwrite_services }}"

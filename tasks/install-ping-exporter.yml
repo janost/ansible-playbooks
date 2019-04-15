@@ -14,12 +14,15 @@
     shell: /sbin/nologin
     group: ping_exporter
     system: yes
-- name: create /opt/ping_exporter
+- name: create ping_exporter directories
   file:
-    name: /opt/ping_exporter
+    name: "{{ item }}"
     state: directory
     owner: ping_exporter
     group: ping_exporter
+  with_items:
+    - /opt/ping_exporter
+    - /etc/ping_exporter
 - name: install ping_exporter
   unarchive:
     dest: /opt/ping_exporter
@@ -29,12 +32,12 @@
     src: "{{ tmp_ping_exporter }}"
     extra_opts: ["--strip=2"]
 - name: configure ping_exporter
-  template:
-    src: templates/config/ping_exporter.yml
-    dest: /etc/ping_exporter.yml
+  copy:
+    src: files/etc/ping_exporter/config.yml
+    dest: /etc/ping_exporter/config.yml
     force: "{{ overwrite_configs }}"
 - name: copy ping_exporter service unit
-  template:
-    src: templates/systemd/ping_exporter.service
+  copy:
+    src: files/etc/systemd/system/ping_exporter.service
     dest: /etc/systemd/system/ping_exporter.service
     force: "{{ overwrite_services }}"
