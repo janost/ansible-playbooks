@@ -1,0 +1,36 @@
+---
+- name: define facts
+  set_fact:
+    install_prometheus: true
+    install_node_exporter: true
+    install_ping_exporter: true
+
+- name: get installed prometheus version
+  shell: /opt/prometheus/prometheus --version
+  register: prometheus_installed_version
+  ignore_errors: yes
+- name: decide if prometheus install is needed
+  set_fact:
+    install_prometheus: false
+  when: prometheus_version in prometheus_installed_version.stderr
+  ignore_errors: yes
+
+- name: get installed node_exporter version
+  shell: /opt/node_exporter/node_exporter --version
+  register: node_exporter_installed_version
+  ignore_errors: yes
+- name: decide if node_exporter install is needed
+  set_fact:
+    install_node_exporter: false
+  when: node_exporter_version in node_exporter_installed_version.stderr
+  ignore_errors: yes
+
+- name: get installed ping_exporter version
+  shell: /opt/ping_exporter/ping_exporter --version
+  register: ping_exporter_installed_version
+  ignore_errors: yes
+- name: decide if ping_exporter install is needed
+  set_fact:
+    install_ping_exporter: false
+  when: ping_exporter_version in ping_exporter_installed_version.stdout
+  ignore_errors: yes

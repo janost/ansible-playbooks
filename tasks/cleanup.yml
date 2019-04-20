@@ -7,3 +7,4 @@
     - "{{ tmp_node_exporter }}"
     - "{{ tmp_ping_exporter }}"
     - "{{ tmp_prometheus }}"
+  ignore_errors: yes

@@ -1,11 +1,22 @@
 ---
-- name: start and enable services
+- name: restart prometheus
   systemd:
-    state: started
+    state: restarted
     enabled: yes
     daemon_reload: yes
-    name: "{{ item }}"
-  with_items:
-    - node_exporter
-    - ping_exporter
-    - prometheus
+    name: prometheus
+  when: install_prometheus
+- name: restart node_exporter
+  systemd:
+    state: restarted
+    enabled: yes
+    daemon_reload: yes
+    name: node_exporter
+  when: install_node_exporter
+- name: restart ping_exporter
+  systemd:
+    state: restarted
+    enabled: yes
+    daemon_reload: yes
+    name: ping_exporter
+  when: install_ping_exporter

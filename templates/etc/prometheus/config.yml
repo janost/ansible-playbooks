@@ -3,7 +3,7 @@ global:
   evaluation_interval: 5s
   scrape_timeout:      5s
   external_labels:
-    hostname: "{{ node_hostname.stdout }}"
+    hostname: "{{ ansible_hostname }}"
 
 alerting:
   alertmanagers:

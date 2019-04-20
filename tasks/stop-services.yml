@@ -1,0 +1,19 @@
+---
+- name: stop prometheus
+  systemd:
+    state: stopped
+    name: prometheus
+  ignore_errors: yes
+  when: install_prometheus
+- name: stop node_exporter
+  systemd:
+    state: stopped
+    name: node_exporter
+  ignore_errors: yes
+  when: install_node_exporter
+- name: stop ping_exporter
+  systemd:
+    state: stopped
+    name: ping_exporter
+  ignore_errors: yes
+  when: install_ping_exporter
