@@ -1,10 +1,4 @@
 ---
-- name: download node_exporter
-  get_url:
-    url: "{{ url_node_exporter }}"
-    dest: "{{ tmp_node_exporter }}"
-    mode: 0400
-    force: yes
 - name: create node_exporter group
   group:
     name: node_exporter
@@ -28,7 +22,7 @@
     owner: node_exporter
     group: node_exporter
     remote_src: yes
-    src: "{{ tmp_node_exporter }}"
+    src: "{{ url_node_exporter }}"
     extra_opts: ["--strip=1"]
 - name: copy node_exporter service unit
   copy:

@@ -1,10 +1,4 @@
 ---
-- name: download prometheus
-  get_url:
-    url: "{{ url_prometheus }}"
-    dest: "{{ tmp_prometheus }}"
-    mode: 0400
-    force: yes
 - name: create prometheus group
   group:
     name: prometheus
@@ -31,7 +25,7 @@
     owner: prometheus
     group: prometheus
     remote_src: yes
-    src: "{{ tmp_prometheus }}"
+    src: "{{ url_prometheus }}"
     extra_opts: ["--strip=1"]
 - name: copy prometheus service unit
   copy:

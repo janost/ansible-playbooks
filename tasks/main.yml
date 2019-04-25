@@ -1,7 +1,7 @@
 ---
 - name: load architecture-dependent configuration
   include_vars:
-    file: "vars/config_{{ ansible_architecture }}.yaml"
+    file: "vars/config_{{ ansible_architecture }}.yml"
 
 - import_tasks: get-versions.yml
 - import_tasks: stop-services.yml
@@ -12,4 +12,3 @@
 - import_tasks: install-prometheus.yml
   when: install_prometheus
 - import_tasks: start-services.yml
-- import_tasks: cleanup.yml

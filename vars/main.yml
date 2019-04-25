@@ -1,4 +1,1 @@
 ---
-tmp_node_exporter: /tmp/node_exporter.tar.gz
-tmp_ping_exporter: /tmp/ping_exporter.tar.gz
-tmp_prometheus: /tmp/prometheus.tar.gz

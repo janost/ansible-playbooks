@@ -1,8 +1,4 @@
 ---
-- name: download ping_exporter
-  copy:
-    src: "{{ tarball_ping_exporter }}"
-    dest: "{{ tmp_ping_exporter }}"
 - name: create ping_exporter group
   group:
     name: ping_exporter
@@ -28,8 +24,8 @@
     dest: /opt/ping_exporter
     owner: ping_exporter
     group: ping_exporter
-    remote_src: yes
-    src: "{{ tmp_ping_exporter }}"
+    remote_src: no
+    src: "{{ tarball_ping_exporter }}"
     extra_opts: ["--strip=2"]
 - name: configure ping_exporter
   copy:
