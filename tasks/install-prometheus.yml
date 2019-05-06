@@ -19,6 +19,7 @@
   with_items:
     - /opt/prometheus
     - /etc/prometheus
+    - /var/lib/prometheus
 - name: install prometheus
   unarchive:
     dest: /opt/prometheus

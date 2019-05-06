@@ -7,11 +7,11 @@ After=network-online.target
 User=prometheus
 Group=prometheus
 Restart=on-failure
-ProtectSystem=full
+ProtectSystem=strict
 ProtectHome=true
 TimeoutSec=10s
-WorkingDirectory=/opt/prometheus
-ExecStart=/opt/prometheus/prometheus --storage.tsdb.path=/opt/prometheus/data --storage.tsdb.retention.time=1d --config.file="/etc/prometheus/config.yml"
+ReadWritePaths=/var/lib/prometheus
+ExecStart=/opt/prometheus/prometheus --storage.tsdb.path=/var/lib/prometheus --storage.tsdb.retention.time=1d --config.file=/etc/prometheus/config.yml
 
 [Install]
 WantedBy=multi-user.target
