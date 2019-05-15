@@ -2,13 +2,29 @@
 Description=Ping Exporter
 
 [Service]
-User=ping_exporter
-Group=ping_exporter
+ExecStart=/opt/ping_exporter/ping_exporter --config.path=/etc/ping_exporter/config.yml
+TimeoutSec=5s
+DynamicUser=yes
 ProtectSystem=strict
 ProtectHome=true
-TimeoutSec=5s
-ExecStart=/opt/ping_exporter/ping_exporter --config.path=/etc/ping_exporter/config.yml
+Restart=on-failure
 AmbientCapabilities=CAP_NET_RAW
+NoNewPrivileges=true
+PrivateTmp=true
+PrivateDevices=true
+DevicePolicy=closed
+#PrivateUsers=true
+ProtectKernelTunables=true
+ProtectKernelModules=true
+ProtectControlGroups=true
+LockPersonality=true
+MemoryDenyWriteExecute=true
+RestrictRealtime=true
+RemoveIPC=true
+PrivateMounts=true
+RestrictAddressFamilies=AF_UNIX AF_INET AF_INET6 AF_NETLINK
+TemporaryFileSystem=/
+RestrictSUIDSGID=true
 
 [Install]
 WantedBy=multi-user.target

@@ -2,12 +2,28 @@
 Description=Node Exporter
 
 [Service]
-User=node_exporter
-Group=node_exporter
+ExecStart=/opt/node_exporter/node_exporter --no-collector.arp --no-collector.bcache --no-collector.bonding --no-collector.conntrack --no-collector.edac --no-collector.filefd --no-collector.infiniband --no-collector.ipvs --no-collector.mdadm --no-collector.netstat --no-collector.nfs --no-collector.nfsd --no-collector.sockstat --no-collector.stat --no-collector.textfile --no-collector.time --no-collector.timex --no-collector.uname --no-collector.vmstat --no-collector.wifi --no-collector.xfs --no-collector.zfs --no-collector.hwmon
+TimeoutSec=5s
+DynamicUser=yes
 ProtectSystem=strict
 ProtectHome=true
-TimeoutSec=5s
-ExecStart=/opt/node_exporter/node_exporter --no-collector.arp --no-collector.bcache --no-collector.bonding --no-collector.conntrack --no-collector.edac --no-collector.filefd --no-collector.infiniband --no-collector.ipvs --no-collector.mdadm --no-collector.netstat --no-collector.nfs --no-collector.nfsd --no-collector.sockstat --no-collector.stat --no-collector.textfile --no-collector.time --no-collector.timex --no-collector.uname --no-collector.vmstat --no-collector.wifi --no-collector.xfs --no-collector.zfs --no-collector.hwmon
+Restart=on-failure
+NoNewPrivileges=true
+PrivateTmp=true
+PrivateDevices=true
+DevicePolicy=closed
+PrivateUsers=true
+ProtectKernelTunables=true
+ProtectKernelModules=true
+ProtectControlGroups=true
+LockPersonality=true
+MemoryDenyWriteExecute=true
+RestrictRealtime=true
+RemoveIPC=true
+PrivateMounts=true
+RestrictAddressFamilies=AF_UNIX AF_INET AF_INET6 AF_NETLINK
+TemporaryFileSystem=/
+RestrictSUIDSGID=true
 
 [Install]
 WantedBy=multi-user.target

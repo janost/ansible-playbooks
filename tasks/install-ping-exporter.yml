@@ -1,29 +1,18 @@
 ---
-- name: create ping_exporter group
-  group:
-    name: ping_exporter
-    system: yes
-- name: create ping_exporter user
-  user:
-    name: ping_exporter
-    create_home: no
-    shell: /sbin/nologin
-    group: ping_exporter
-    system: yes
 - name: create ping_exporter directories
   file:
     name: "{{ item }}"
     state: directory
-    owner: ping_exporter
-    group: ping_exporter
+    owner: root
+    group: root
   with_items:
     - /opt/ping_exporter
     - /etc/ping_exporter
 - name: install ping_exporter
   unarchive:
     dest: /opt/ping_exporter
-    owner: ping_exporter
-    group: ping_exporter
+    owner: root
+    group: root
     remote_src: no
     src: "{{ tarball_ping_exporter }}"
     extra_opts: ["--strip=2"]

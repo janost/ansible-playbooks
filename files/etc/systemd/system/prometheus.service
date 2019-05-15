@@ -4,14 +4,29 @@ Documentation=https://prometheus.io/docs/introduction/overview/
 After=network-online.target
 
 [Service]
-User=prometheus
-Group=prometheus
-Restart=on-failure
+ExecStart=/opt/prometheus/prometheus --storage.tsdb.path=/var/lib/prometheus --storage.tsdb.retention.time=1d --config.file=/etc/prometheus/config.yml
+TimeoutSec=10s
+DynamicUser=yes
 ProtectSystem=strict
 ProtectHome=true
-TimeoutSec=10s
-ReadWritePaths=/var/lib/prometheus
-ExecStart=/opt/prometheus/prometheus --storage.tsdb.path=/var/lib/prometheus --storage.tsdb.retention.time=1d --config.file=/etc/prometheus/config.yml
+Restart=on-failure
+StateDirectory=prometheus
+NoNewPrivileges=true
+PrivateTmp=true
+PrivateDevices=true
+DevicePolicy=closed
+PrivateUsers=true
+ProtectKernelTunables=true
+ProtectKernelModules=true
+ProtectControlGroups=true
+LockPersonality=true
+MemoryDenyWriteExecute=true
+RestrictRealtime=true
+RemoveIPC=true
+PrivateMounts=true
+RestrictAddressFamilies=AF_UNIX AF_INET AF_INET6 AF_NETLINK
+TemporaryFileSystem=/
+RestrictSUIDSGID=true
 
 [Install]
 WantedBy=multi-user.target
