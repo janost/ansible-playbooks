@@ -2,6 +2,6 @@
 prom_remote_write_endpoint: "http://127.0.0.1:8086/api/v1/prom/write?u=user&p=password&db=database"
 overwrite_configs: no
 overwrite_services: yes
-prometheus_version: 2.9.2
+prometheus_version: 2.10.0
 node_exporter_version: 0.18.0
 ping_exporter_version: 0.4.4
