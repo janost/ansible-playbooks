@@ -2,7 +2,7 @@
 Description=Node Exporter
 
 [Service]
-ExecStart=/opt/node_exporter/node_exporter --no-collector.arp --no-collector.bcache --no-collector.bonding --no-collector.conntrack --no-collector.edac --no-collector.filefd --no-collector.infiniband --no-collector.ipvs --no-collector.mdadm --no-collector.netstat --no-collector.nfs --no-collector.nfsd --no-collector.sockstat --no-collector.stat --no-collector.textfile --no-collector.time --no-collector.timex --no-collector.uname --no-collector.vmstat --no-collector.wifi --no-collector.xfs --no-collector.zfs --no-collector.hwmon
+ExecStart=/opt/node_exporter/node_exporter --no-collector.arp --no-collector.bcache --no-collector.bonding --no-collector.edac --no-collector.infiniband --no-collector.ipvs --no-collector.nfs --no-collector.nfsd --no-collector.textfile --no-collector.time --no-collector.timex --no-collector.wifi --no-collector.xfs --no-collector.zfs
 TimeoutSec=5s
 DynamicUser=yes
 ProtectSystem=strict
