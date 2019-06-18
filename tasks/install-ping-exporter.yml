@@ -26,3 +26,5 @@
     src: files/etc/systemd/system/ping_exporter.service
     dest: /etc/systemd/system/ping_exporter.service
     force: "{{ overwrite_services }}"
+- name: write ping_exporter version
+  shell: "echo \"{{ ping_exporter_version }}\" > /opt/ping_exporter/version"

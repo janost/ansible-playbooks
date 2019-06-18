@@ -18,3 +18,5 @@
     src: files/etc/systemd/system/node_exporter.service
     dest: /etc/systemd/system/node_exporter.service
     force: "{{ overwrite_services }}"
+- name: write node_exporter version
+  shell: "echo \"{{ node_exporter_version }}\" > /opt/node_exporter/version"

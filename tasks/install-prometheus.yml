@@ -26,3 +26,5 @@
     src: templates/etc/prometheus/config.yml
     dest: /etc/prometheus/config.yml
     force: "{{ overwrite_configs }}"
+- name: write prometheus version
+  shell: "echo \"{{ prometheus_version }}\" > /opt/prometheus/version"
