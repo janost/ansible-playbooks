@@ -4,7 +4,7 @@ Documentation=https://prometheus.io/docs/introduction/overview/
 After=network-online.target
 
 [Service]
-ExecStart=/opt/prometheus/prometheus --storage.tsdb.path=/var/lib/prometheus --storage.tsdb.retention.time=1d --config.file=/etc/prometheus/config.yml
+ExecStart=/opt/prometheus/prometheus --storage.tsdb.path=/var/lib/prometheus --storage.tsdb.retention.time=1d --storage.tsdb.wal-compression --config.file=/etc/prometheus/config.yml
 TimeoutSec=10s
 DynamicUser=yes
 ProtectSystem=strict
