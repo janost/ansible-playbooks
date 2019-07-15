@@ -23,6 +23,3 @@ scrape_configs:
       - source_labels: [__name__]
         regex: 'ping_rtt_ms'
         action: drop
-
-remote_write:
-  - url: "{{ prom_remote_write_endpoint }}"
