@@ -1,6 +1,8 @@
 ---
 targets:
   - 8.8.8.8
+  - 5.28.0.17
+  - 2a00:e6a0:1::1
   - 172.30.100.1
 
 dns:
@@ -11,4 +13,4 @@ ping:
   interval: 0.5s
   timeout: 0.49s
   history-size: 10
-  payload-size: 56
+  payload-size: 0

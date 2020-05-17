@@ -2,28 +2,34 @@
 Description=Node Exporter
 
 [Service]
-ExecStart=/opt/node_exporter/node_exporter --no-collector.arp --no-collector.bcache --no-collector.bonding --no-collector.edac --no-collector.infiniband --no-collector.ipvs --no-collector.nfs --no-collector.nfsd --no-collector.textfile --no-collector.time --no-collector.timex --no-collector.wifi --no-collector.xfs --no-collector.zfs
+ExecStart=/opt/node_exporter/node_exporter
+BindReadOnlyPaths=/opt/node_exporter
 TimeoutSec=5s
 DynamicUser=yes
-ProtectSystem=strict
-ProtectHome=true
 Restart=on-failure
-NoNewPrivileges=true
-PrivateTmp=true
-PrivateDevices=true
 DevicePolicy=closed
-PrivateUsers=true
-ProtectKernelTunables=true
-ProtectKernelModules=true
-ProtectControlGroups=true
 LockPersonality=true
 MemoryDenyWriteExecute=true
-RestrictRealtime=true
-RemoveIPC=true
+NoNewPrivileges=true
+PrivateDevices=true
 PrivateMounts=true
+PrivateTmp=true
+PrivateUsers=true
+ProtectClock=false
+ProtectControlGroups=true
+ProtectHome=true
+ProtectHostname=true
+ProtectKernelLogs=true
+ProtectKernelModules=true
+ProtectKernelTunables=true
+ProtectSystem=strict
+RemoveIPC=true
 RestrictAddressFamilies=AF_UNIX AF_INET AF_INET6 AF_NETLINK
-TemporaryFileSystem=/
+RestrictNamespaces=true
+RestrictRealtime=true
 RestrictSUIDSGID=true
+SystemCallArchitectures=native
+TemporaryFileSystem=/var /etc /media /mnt /opt /srv
 
 [Install]
 WantedBy=multi-user.target
